@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/person_check"
+        android:id="@+id/imgPerson"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Chuẩn hoá thông tin"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/tvCHTT"
+        android:layout_below="@id/imgPerson"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/create_new_folder"
+        android:layout_toRightOf="@id/imgPerson"
+        android:layout_marginStart="50dp"
+        android:id="@+id/imgFolder"/>
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Gói cước 4G/5G"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/tvData"
+        android:layout_below="@id/imgFolder"
+        android:layout_toRightOf="@id/tvCHTT"/>
+</RelativeLayout>
