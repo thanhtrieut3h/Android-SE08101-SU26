@@ -78,6 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     if (checkFlag){
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        Intent menuAc = new Intent(LoginActivity.this, MenuActivity.class);
+                        startActivity(menuAc);
+                        finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "Account invalid", Toast.LENGTH_SHORT).show();
                     }
