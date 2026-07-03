@@ -1,7 +1,9 @@
 package com.example.aistudymentor.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +31,21 @@ public class MenuActivity  extends AppCompatActivity implements NavigationView.O
     NavigationView navigationView;
     Menu menu;
     MenuItem itemLogout;
+    SharedPreferences sharedPrf;
+    private String userAccount = "";
+    private int userId = 0;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (userId <= 0 || TextUtils.isEmpty(userAccount)){
+            // chua su dung chuc nang dang nhap
+            Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +57,11 @@ public class MenuActivity  extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.navigationView);
         menu = navigationView.getMenu();
         itemLogout = menu.findItem(R.id.logout_menu);
-
+        sharedPrf = getSharedPreferences("USER_INFO", MODE_PRIVATE);
+        if (sharedPrf != null) {
+            userAccount = sharedPrf.getString("USERNAME_USER", "");
+            userId = sharedPrf.getInt("ID_USER", 0);
+        }
         // xu ly de dong/mo drawer navigation
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -55,11 +76,21 @@ public class MenuActivity  extends AppCompatActivity implements NavigationView.O
         clickTabBottomNavigation();
         // logout
         logoutApp();
+        // hien thi thong tin nguoi dang nhap
+        MenuItem itemUser = menu.findItem(R.id.account_menu);
+        if (userAccount != null) {
+            itemUser.setTitle(userAccount);
+        }
     }
     private void logoutApp(){
         itemLogout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                // xoa du lieu da luu trong sharePreference
+                SharedPreferences.Editor editor = sharedPrf.edit();
+                editor.clear();
+                editor.apply();
+
                 drawerLayout.closeDrawer(GravityCompat.START);
                 Intent login = new Intent(MenuActivity.this, LoginActivity.class);
                 startActivity(login);
