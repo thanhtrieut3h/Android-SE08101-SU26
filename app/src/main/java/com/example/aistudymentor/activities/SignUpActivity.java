@@ -19,7 +19,7 @@ import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText edtUsername, edtPassword;
+    EditText edtUsername, edtPassword, edtEmail, edtPhone;
     Button btnSignUp;
     TextView tvLogin;
     @Override
@@ -30,6 +30,9 @@ public class SignUpActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnSignUp   = findViewById(R.id.btnSubmit);
         tvLogin     = findViewById(R.id.tvLogin);
+        edtEmail    = findViewById(R.id.edtEmail);
+        edtPhone    = findViewById(R.id.edtPhone);
+
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
