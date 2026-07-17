@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,11 @@ import android.widget.Button;
 
 import com.example.aistudymentor.R;
 import com.example.aistudymentor.activities.categories.AddCategoryActivity;
+import com.example.aistudymentor.adapters.CategoryListAdapter;
+import com.example.aistudymentor.models.CategoryModel;
+import com.example.aistudymentor.repository.CategoryRepository;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +34,10 @@ public class CategoryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<CategoryModel> categoryArrayList;
+    private CategoryListAdapter categoryAdapter;
+    private CategoryRepository categoryRepository;
+    private RecyclerView recyclerView;
 
     public CategoryFragment() {
         // Required empty public constructor
