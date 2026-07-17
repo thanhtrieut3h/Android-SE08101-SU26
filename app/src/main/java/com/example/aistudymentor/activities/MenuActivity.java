@@ -32,6 +32,8 @@ public class MenuActivity  extends AppCompatActivity implements NavigationView.O
     Menu menu;
     MenuItem itemLogout;
     SharedPreferences sharedPrf;
+    Intent dataIntent;
+    Bundle dataBundle;
     private String userAccount = "";
     private int userId = 0;
 
@@ -43,6 +45,17 @@ public class MenuActivity  extends AppCompatActivity implements NavigationView.O
             Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+        }
+        activeMenu(dataIntent, dataBundle);
+    }
+    private void activeMenu(Intent intent, Bundle bundle){
+        intent = getIntent();
+        bundle = intent.getExtras();
+        if (bundle != null) {
+            String menuTab = bundle.getString("MENU_TAB", "").toLowerCase();
+            if (menuTab.equals("category")){
+                viewPager.setCurrentItem(1);
+            }
         }
     }
 
@@ -57,6 +70,8 @@ public class MenuActivity  extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.navigationView);
         menu = navigationView.getMenu();
         itemLogout = menu.findItem(R.id.logout_menu);
+        dataIntent = getIntent();
+        dataBundle = dataIntent.getExtras();
         sharedPrf = getSharedPreferences("USER_INFO", MODE_PRIVATE);
         if (sharedPrf != null) {
             userAccount = sharedPrf.getString("USERNAME_USER", "");
